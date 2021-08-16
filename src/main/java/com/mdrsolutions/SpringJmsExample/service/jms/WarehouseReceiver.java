@@ -1,7 +1,7 @@
 package com.mdrsolutions.SpringJmsExample.service.jms;
 
-import com.mdrsolutions.SpringJmsExample.pojos.BookOrder;
-import com.mdrsolutions.SpringJmsExample.pojos.ProcessedBookOrder;
+import com.mdrsolutions.SpringJmsExample.pojos.GoodsOrder;
+import com.mdrsolutions.SpringJmsExample.pojos.ProcessedGoodsOrder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,21 +19,22 @@ public class WarehouseReceiver {
     @Autowired
     private WarehouseProcessingService warehouseProcessingService;
 
-    @JmsListener(destination = "book.order.queue")
-    public JmsResponse<Message<ProcessedBookOrder>> receive(@Payload BookOrder bookOrder,
-                                                           @Header(name="orderState")String orderState,
-                                                           @Header(name="bookOrderId")String bookOrderId,
-                                                           @Header(name="storeId")String storeId
+    @JmsListener(destination = "goods.order.queue")
+    public JmsResponse<Message<ProcessedGoodsOrder>> receive(@Payload GoodsOrder goodsOrder,
+                                                             @Header(name="orderState")String orderState,
+                                                             @Header(name="goodsOrderId")String goodsOrderId,
+                                                             @Header(name="storeId")String storeId
                                                            ){
         LOGGER.info("Message received!");
-        LOGGER.info("Message is == " + bookOrder);
-        LOGGER.info("Message property orderState = {}, bookOrderId = {}, storeId = {}", orderState, bookOrder, storeId);
+        LOGGER.info("Message is == " + goodsOrder);
+        LOGGER.info("Message property orderState = {}, goodsOrderId = {}, storeId = {}", orderState, goodsOrder, storeId);
 
 
-        if(bookOrder.getBook().getTitle().startsWith("L")){
-            throw new IllegalArgumentException("bookOrderId=" + bookOrder.getBookOrderId() + " is of a book not allowed!");
+        if(goodsOrder.getGoods().getTitle().startsWith("L")){
+            throw new IllegalArgumentException("Error in order=" + goodsOrder.getGoodsOrderId()
+                    + " too much!");
         }
 
-        return warehouseProcessingService.processOrder(bookOrder, orderState, storeId);
+        return warehouseProcessingService.processOrder(goodsOrder, orderState, storeId);
     }
 }

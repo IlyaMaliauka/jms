@@ -42,15 +42,15 @@ About
 </li>
 </ul>
 </nav>
-<h3 class="text-muted">Book Order Form</h3>
+<h3 class="text-muted">Goods Order Form</h3>
 </div>
 <div class="jumbotron row">
 <div class="col-lg-6">
 <img src="${pageContext.request.contextPath}/images/random_books.png" style="width: 350px;" class="rounded" alt="picture of random books"/>
 </div>
 <div class="col-lg-6">
-<h1 class="display-3">Your Books Galore  </h1>
-<p class="lead">Place book orders here to warehouse for shipping</p>
+<h1 class="display-3">Goods store  </h1>
+<p class="lead">Place goods orders here to warehouse for shipping</p>
 </div>
 </div>
 <div class="panel panel-default">
@@ -70,10 +70,11 @@ About
 <!--input type="text" id="customerId" class="form-control" placeholder="Customer Account Number" aria-describedby="basic-addon2"-->
 </div>
 <br/>
-<h4>Books</h4>
-<select class="form-control" id="bookId">
-<c:forEach var="item" items="${books}">
-<option value="${item.bookId}">${item.bookId} - ${item.title}</option>
+<h4>Goods</h4>
+<select class="form-control" id="goodsId">
+<div class="input-group">
+<c:forEach var="item" items="${goods}">
+<option value="${item.goodsId}">${item.goodsId} - ${item.title}</option>
 </c:forEach>
 </select>
 <br/>
@@ -91,7 +92,7 @@ About
 </div>
 </div>
 <footer class="footer">
-<p>&copy; Your Books Galore 2017</p>
+<p>&copy; Sample App</p>
 </footer>
 
 </div>
@@ -100,11 +101,11 @@ About
 function processOrder(){
 var randomStoreId = Math.floor(Math.random() * 100000);
 var randomOrderId = Math.floor(Math.random() * 100000);
-var bookId = $('#bookId').val();
+var goodsId = $('#goodsId').val();
 var customerId = $('#customerId').val();
 var orderStateId = $('#orderStateId').val();
-//alert(randomOrderId + " - " + customerId + " - " + bookId);
-jQuery.get('${pageContext.request.contextPath}/process/store/'+randomStoreId+'/order/'+randomOrderId+'/'+customerId+'/'+bookId+'/'+orderStateId+"/",
+//alert(randomOrderId + " - " + customerId + " - " + goodsId);
+jQuery.get('${pageContext.request.contextPath}/process/store/'+randomStoreId+'/order/'+randomOrderId+'/'+customerId+'/'+goodsId+'/'+orderStateId+"/",
 function(data, status){
 $("#jmsMessageAlert").removeClass('hide');
 $("#jmsMessageAlert span").text(data);

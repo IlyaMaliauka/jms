@@ -2,7 +2,11 @@ package com.mdrsolutions.SpringJmsExample.pojos;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Getter;
+import lombok.ToString;
 
+@Getter
+@ToString
 public class Customer {
 
     @JsonCreator
@@ -13,21 +17,5 @@ public class Customer {
 
     private final String customerId;
     private final String fullName;
-
-    public String getCustomerId() {
-        return customerId;
-    }
-
-    public String getFullName() {
-        return fullName;
-    }
-
-    @Override
-    public String toString() {
-        return "Customer{" +
-                "customerId='" + customerId + '\'' +
-                ", fullName='" + fullName + '\'' +
-                '}';
-    }
 }
 
