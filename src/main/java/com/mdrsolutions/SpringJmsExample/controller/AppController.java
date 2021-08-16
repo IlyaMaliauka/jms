@@ -6,6 +6,7 @@ import com.mdrsolutions.SpringJmsExample.pojos.Goods;
 import com.mdrsolutions.SpringJmsExample.pojos.GoodsOrder;
 import com.mdrsolutions.SpringJmsExample.pojos.Customer;
 import com.mdrsolutions.SpringJmsExample.service.jms.GoodsOrderService;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,22 +14,20 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
 @Controller
+@Slf4j
 public class AppController {
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(AppController.class);
 
     @Autowired
     private GoodsOrderService goodsOrderService;
 
     List<Goods> goods = Arrays.asList(
-            new Goods("test1", "Water"),
-            new Goods("test2", "Coke"),
-            new Goods("test3", "Energy Drink"));
+            new Goods("test1", "Water", 0),
+            new Goods("test2", "Coke", 0),
+            new Goods("test3", "Energy Drink", 0));
 
 
     List<Customer> customers = Arrays.asList(
@@ -53,7 +52,7 @@ public class AppController {
                         @PathVariable("orderState") String orderState) {
 
         try {
-            LOGGER.info("StoredId is = {}", storeId);
+            log.info("StoredId is = {}", storeId);
             goodsOrderService.send(build(customerId, goodsId, orderId), storeId, orderState);
         } catch (Exception exception) {
             return "Error occurred!" + exception.getLocalizedMessage();

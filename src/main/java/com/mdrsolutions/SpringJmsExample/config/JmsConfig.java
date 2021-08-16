@@ -1,5 +1,6 @@
 package com.mdrsolutions.SpringJmsExample.config;
 
+import lombok.extern.slf4j.Slf4j;
 import org.apache.activemq.ActiveMQConnectionFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,9 +22,8 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableJms
 @EnableTransactionManagement
 @Configuration
+@Slf4j
 public class JmsConfig {
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(JmsConfig.class);
 
     @Value("${spring.activemq.broker-url}")
     private String brokerUrl;
@@ -63,7 +63,7 @@ public class JmsConfig {
         factory.setMessageConverter(jacksonJmsMessageConverter());
         factory.setTransactionManager(jmsTransactionManager());
         factory.setErrorHandler(t -> {
-            LOGGER.info("Handling error in listening for messages, error: " + t.getMessage());
+            log.info("Handling error in listening for messages, error: " + t.getMessage());
         });
         return factory;
     }

@@ -1,5 +1,6 @@
 package com.mdrsolutions.SpringJmsExample.listener;
 
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -10,14 +11,14 @@ import javax.jms.MessageListener;
 import javax.jms.TextMessage;
 
 @Component
+@Slf4j
 public class GoodsOrderProcessingMessageListener implements MessageListener {
-    private static final Logger LOGGER = LoggerFactory.getLogger(GoodsOrderProcessingMessageListener.class);
 
     @Override
     public void onMessage(Message message) {
         try {
             String text = ((TextMessage) message).getText();
-            LOGGER.info(text);
+            log.info(text);
         } catch (JMSException e) {
             e.printStackTrace();
         }

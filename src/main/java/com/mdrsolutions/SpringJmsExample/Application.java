@@ -27,18 +27,5 @@ public class Application extends SpringBootServletInitializer{
 
 	public static void main(String[] args) {
 		SpringApplication.run(Application.class, args);
-
-		/**
-		ConfigurableApplicationContext context = SpringApplication.run(Application.class, args);
-		Sender sender = context.getBean(Sender.class);
-
-		System.out.println("Preparing to send a message");
-        sender.sendMessage("order-queue", "item: 1234, customer: 1234");
-		 **/
-
 	}
-
-
-
-
 }
