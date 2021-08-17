@@ -19,7 +19,7 @@ public class GoodsOrderService {
     private JmsTemplate jmsTemplate;
 
     @Transactional
-    public void send(GoodsOrder goodsOrder, String storeId, String orderState){
+    public void send(GoodsOrder goodsOrder, String storeId, String orderState) {
         jmsTemplate.convertAndSend(GOODS_QUEUE, goodsOrder, new MessagePostProcessor() {
             @Override
             public Message postProcessMessage(Message message) throws JMSException {

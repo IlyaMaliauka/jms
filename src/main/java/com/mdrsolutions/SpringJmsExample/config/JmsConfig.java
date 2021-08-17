@@ -2,8 +2,6 @@ package com.mdrsolutions.SpringJmsExample.config;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.activemq.ActiveMQConnectionFactory;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -69,12 +67,12 @@ public class JmsConfig {
     }
 
     @Bean
-    public PlatformTransactionManager jmsTransactionManager(){
+    public PlatformTransactionManager jmsTransactionManager() {
         return new JmsTransactionManager(connectionFactory());
     }
 
     @Bean
-    public JmsTemplate jmsTemplate(){
+    public JmsTemplate jmsTemplate() {
         JmsTemplate jmsTemplate = new JmsTemplate(connectionFactory());
         jmsTemplate.setMessageConverter(jacksonJmsMessageConverter());
         jmsTemplate.setDeliveryPersistent(true);

@@ -3,8 +3,6 @@ package com.mdrsolutions.SpringJmsExample.service.jms;
 import com.mdrsolutions.SpringJmsExample.pojos.GoodsOrder;
 import com.mdrsolutions.SpringJmsExample.pojos.ProcessedGoodsOrder;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jms.annotation.JmsListener;
 import org.springframework.jms.listener.adapter.JmsResponse;
@@ -22,16 +20,16 @@ public class WarehouseReceiver {
 
     @JmsListener(destination = "goods.order.queue")
     public JmsResponse<Message<ProcessedGoodsOrder>> receive(@Payload GoodsOrder goodsOrder,
-                                                             @Header(name="orderState")String orderState,
-                                                             @Header(name="goodsOrderId")String goodsOrderId,
-                                                             @Header(name="storeId")String storeId
-                                                           ){
+                                                             @Header(name = "orderState") String orderState,
+                                                             @Header(name = "goodsOrderId") String goodsOrderId,
+                                                             @Header(name = "storeId") String storeId
+    ) {
         log.info("Message received!");
         log.info("Message is == " + goodsOrder);
         log.info("Message property orderState = {}, goodsOrderId = {}, storeId = {}", orderState, goodsOrder, storeId);
 
 
-        if(goodsOrder.getGoods().getQuantity()>5000){
+        if (goodsOrder.getGoods().getQuantity() > 5000L) {
             throw new IllegalArgumentException("Error in order=" + goodsOrder.getGoodsOrderId()
                     + " quantity is unacceptable. Aborting order!");
         }

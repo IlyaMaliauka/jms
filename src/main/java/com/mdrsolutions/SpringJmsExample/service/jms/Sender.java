@@ -12,7 +12,7 @@ public class Sender {
     JmsTemplate jmsTemplate;
 
     @Transactional
-    public void sendMessage(String destination, String message){
+    public void sendMessage(String destination, String message) {
         jmsTemplate.convertAndSend(destination, message);
     }
 }

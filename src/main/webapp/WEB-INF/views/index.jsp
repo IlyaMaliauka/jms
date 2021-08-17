@@ -21,6 +21,7 @@
 display : none;
 }
 
+
     </style>
 
 </head>
@@ -117,6 +118,7 @@ $("#jmsMessageAlert").removeClass('hide');
 $("#jmsMessageAlert span").text(data);
 });
 }
+
 
 </script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/webjars/jquery/3.3.1/jquery.min.js"></script>

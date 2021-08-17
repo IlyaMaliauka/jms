@@ -10,7 +10,7 @@ import lombok.ToString;
 public class GoodsOrder {
 
     @JsonCreator
-    public GoodsOrder(@JsonProperty("goodsOrderId") String goodsOrderId, @JsonProperty("goods") Goods goods, @JsonProperty("customer")Customer customer) {
+    public GoodsOrder(@JsonProperty("goodsOrderId") String goodsOrderId, @JsonProperty("goods") Goods goods, @JsonProperty("customer") Customer customer) {
         this.goodsOrderId = goodsOrderId;
         this.goods = goods;
         this.customer = customer;

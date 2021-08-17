@@ -1,18 +1,17 @@
 package com.mdrsolutions.SpringJmsExample.controller;
 
-import com.fasterxml.jackson.core.JsonParseException;
-import com.fasterxml.jackson.databind.JsonMappingException;
+import com.mdrsolutions.SpringJmsExample.pojos.Customer;
 import com.mdrsolutions.SpringJmsExample.pojos.Goods;
 import com.mdrsolutions.SpringJmsExample.pojos.GoodsOrder;
-import com.mdrsolutions.SpringJmsExample.pojos.Customer;
 import com.mdrsolutions.SpringJmsExample.service.jms.GoodsOrderService;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.Arrays;
 import java.util.List;
@@ -25,7 +24,7 @@ public class AppController {
     private GoodsOrderService goodsOrderService;
 
     List<Goods> goods = Arrays.asList(
-            new Goods("test1", "Water", 0),
+            new Goods("test1", "Water", 50000L),
             new Goods("test2", "Coke", 0),
             new Goods("test3", "Energy Drink", 0));
 
